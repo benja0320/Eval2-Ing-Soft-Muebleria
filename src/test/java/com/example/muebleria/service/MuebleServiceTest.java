@@ -17,27 +17,27 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*; // Importaciones estáticas para Assertions
-import static org.mockito.Mockito.*; // Importaciones estáticas para Mockito
+import static org.junit.jupiter.api.Assertions.*; 
+import static org.mockito.Mockito.*; 
 
-@ExtendWith(MockitoExtension.class) // Habilita Mockito para JUnit 5
+@ExtendWith(MockitoExtension.class) 
 class MuebleServiceTest {
 
-    // 1. Crear un mock (simulación) del repositorio
+    
     @Mock
     private MuebleRepository muebleRepository;
 
-    // 2. Crear una instancia real del servicio e inyectar los mocks
+    
     @InjectMocks
     private MuebleService muebleService;
 
-    // 3. Datos de prueba
+    // datos de prueba
     private Mueble muebleExistente;
     private Mueble muebleNuevo;
 
     @BeforeEach
     void setUp() {
-        // Se ejecuta antes de CADA prueba
+        
         muebleExistente = new Mueble(
                 1L, // id
                 "Silla Clásica", // nombre
@@ -61,77 +61,64 @@ class MuebleServiceTest {
         );
     }
 
-    /**
-     * Requisito 7: Test para Gestión de Catálogo (Crear)
-     */
+    
+    // test para gestionar - crear catalogo
     @Test
     void testCrearMueble_DeberiaGuardarYDevolverMueble() {
-        // Arrange (Configurar el mock)
-        // Cuando se llame a save() con CUALQUIER Mueble...
+        
         when(muebleRepository.save(any(Mueble.class))).thenAnswer(invocation -> {
             Mueble m = invocation.getArgument(0);
-            m.setId(2L); // Simular que la BD le asigna un ID
+            m.setId(2L); // simular que la BD le asigna un ID
             return m;
         });
 
-        // Act (Ejecutar el método a probar)
         Mueble muebleGuardado = muebleService.crearMueble(muebleNuevo);
 
-        // Assert (Verificar el resultado)
+        // se verifica el resultado
         assertNotNull(muebleGuardado);
-        assertEquals(2L, muebleGuardado.getId()); // Verifica que tenga el ID asignado
+        assertEquals(2L, muebleGuardado.getId()); 
         assertEquals("Mesa Centro", muebleGuardado.getNombre());
-        assertEquals(EstadoMueble.ACTIVO, muebleGuardado.getEstado()); // Verifica regla de negocio
+        assertEquals(EstadoMueble.ACTIVO, muebleGuardado.getEstado()); 
 
-        // Verificar que el repositorio fue llamado 1 vez
+        
         verify(muebleRepository, times(1)).save(muebleNuevo);
     }
 
-    /**
-     * Requisito 7: Test para Gestión de Catálogo (Listar/Leer)
-     */
+    
+    // test para listar y leer catalogo
     @Test
     void testListarMuebles_DeberiaDevolverLista() {
-        // Arrange
+
         when(muebleRepository.findAll()).thenReturn(List.of(muebleExistente));
 
-        // Act
         List<Mueble> muebles = muebleService.listarMuebles();
 
-        // Assert
         assertNotNull(muebles);
         assertEquals(1, muebles.size());
         assertEquals("Silla Clásica", muebles.get(0).getNombre());
         verify(muebleRepository, times(1)).findAll();
     }
 
-    /**
-     * Test para obtener un mueble por ID (Caso Exitoso)
-     */
+    
+
+     //caso exitoso para obtenr un mueble por id
     @Test
     void testObtenerMueblePorId_CuandoExiste_DeberiaDevolverMueble() {
-        // Arrange
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(muebleExistente));
 
-        // Act
         Mueble muebleEncontrado = muebleService.obtenerMueblePorId(1L);
 
-        // Assert
         assertNotNull(muebleEncontrado);
         assertEquals(1L, muebleEncontrado.getId());
         verify(muebleRepository, times(1)).findById(1L);
     }
 
-    /**
-     * Test para obtener un mueble por ID (Caso No Encontrado)
-     */
+    
     @Test
     void testObtenerMueblePorId_CuandoNoExiste_DeberiaLanzarExcepcion() {
-        // Arrange
         when(muebleRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act & Assert
-        // Verificamos que se lanza la excepción EntityNotFoundException
+        
         Exception exception = assertThrows(EntityNotFoundException.class, () -> {
             muebleService.obtenerMueblePorId(99L);
         });
@@ -140,16 +127,14 @@ class MuebleServiceTest {
         verify(muebleRepository, times(1)).findById(99L);
     }
 
-    /**
-     * Requisito 7: Test para Gestión de Catálogo (Actualizar)
-     */
+    // test para actualizar catalogo
     @Test
     void testActualizarMueble_DeberiaActualizarDatos() {
-        // Arrange
+        
         Mueble datosNuevos = new Mueble();
         datosNuevos.setNombre("Silla Clásica Moderna");
         datosNuevos.setStock(20);
-        // ... (se setean todos los campos)
+
         datosNuevos.setPrecioBase(new BigDecimal("60000"));
         datosNuevos.setTipo(muebleExistente.getTipo());
         datosNuevos.setEstado(muebleExistente.getEstado());
@@ -157,45 +142,37 @@ class MuebleServiceTest {
         datosNuevos.setMaterial(muebleExistente.getMaterial());
 
 
-        // 1. Simular la búsqueda del objeto original
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(muebleExistente));
         
-        // 2. Simular el guardado (devuelve el objeto que se le pasa)
         when(muebleRepository.save(any(Mueble.class))).thenAnswer(i -> i.getArgument(0));
 
-        // Act
         Mueble muebleActualizado = muebleService.actualizarMueble(1L, datosNuevos);
 
-        // Assert
+        
         assertNotNull(muebleActualizado);
-        assertEquals(1L, muebleActualizado.getId()); // El ID no cambia
-        assertEquals("Silla Clásica Moderna", muebleActualizado.getNombre()); // El nombre sí
-        assertEquals(20, muebleActualizado.getStock()); // El stock sí
+        assertEquals(1L, muebleActualizado.getId()); 
+        assertEquals("Silla Clásica Moderna", muebleActualizado.getNombre()); 
+        assertEquals(20, muebleActualizado.getStock()); 
         assertEquals(new BigDecimal("60000"), muebleActualizado.getPrecioBase());
 
         verify(muebleRepository, times(1)).findById(1L);
-        verify(muebleRepository, times(1)).save(muebleExistente); // Verifica que se guarda el objeto original modificado
+        verify(muebleRepository, times(1)).save(muebleExistente); 
     }
 
-    /**
-     * Requisito 7: Test para Gestión de Catálogo (Desactivar)
-     */
+    // test para desactivar (cambiar el estado a inactivo)
     @Test
     void testDesactivarMueble_DeberiaCambiarEstadoAInactivo() {
-        // Arrange
-        // 1. Simular la búsqueda
+        
         when(muebleRepository.findById(1L)).thenReturn(Optional.of(muebleExistente));
-        // 2. Simular el guardado
         when(muebleRepository.save(any(Mueble.class))).thenAnswer(i -> i.getArgument(0));
 
-        // Act
+
         Mueble muebleDesactivado = muebleService.desactivarMueble(1L);
 
-        // Assert
         assertNotNull(muebleDesactivado);
-        assertEquals(EstadoMueble.INACTIVO, muebleDesactivado.getEstado()); // ¡La aserción clave!
+        assertEquals(EstadoMueble.INACTIVO, muebleDesactivado.getEstado()); 
 
         verify(muebleRepository, times(1)).findById(1L);
-        verify(muebleRepository, times(1)).save(muebleExistente); // Verifica que se guarda el objeto original con el estado cambiado
+        verify(muebleRepository, times(1)).save(muebleExistente); 
     }
 }

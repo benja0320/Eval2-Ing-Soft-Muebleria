@@ -24,26 +24,26 @@ import java.util.Scanner;
 @Component
 public class MenuRunner implements CommandLineRunner {
 
-    // 1. Inyectamos TODOS los servicios
+    
     private final MuebleService muebleService;
     private final CotizacionService cotizacionService;
     private final VentaService ventaService;
-    private final VariacionService variacionService; // <-- NUEVO SERVICIO INYECTADO
+    private final VariacionService variacionService; // 
 
-    // Constructor actualizado
+    
     public MenuRunner(MuebleService muebleService, CotizacionService cotizacionService,
                       VentaService ventaService, VariacionService variacionService) {
         this.muebleService = muebleService;
         this.cotizacionService = cotizacionService;
         this.ventaService = ventaService;
-        this.variacionService = variacionService; // <-- ASIGNACIÓN
+        this.variacionService = variacionService; 
     }
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("==========================================");
-        System.out.println("   BIENVENIDO A MUEBLERÍA HNOS. S.A. (CLI)  ");
-        System.out.println("==========================================");
+        System.out.println("=========================================================");
+        System.out.println("   BIENVENIDO A MUEBLERÍA FALSA 123. S.A. ");
+        System.out.println("=========================================================");
         System.out.println("INFO: La API REST está corriendo en http://localhost:8080");
 
         Scanner scanner = new Scanner(System.in);
@@ -63,17 +63,17 @@ public class MenuRunner implements CommandLineRunner {
                         crearMueble(scanner);
                         break;
                     case 3:
-                        crearCotizacion(scanner); // <-- ESTE MÉTODO FUE MODIFICADO
+                        crearCotizacion(scanner); 
                         break;
                     case 4:
                         confirmarVenta(scanner);
                         break;
                     case 5:
-                        gestionarVariaciones(scanner); // <-- NUEVA OPCIÓN
+                        gestionarVariaciones(scanner); 
                         break;
-                    case 6: // <-- Opción de salir actualizada
+                    case 6: 
                         salir = true;
-                        System.out.println("Gracias por usar el sistema. Saliendo...");
+                        System.out.println("Saliendo...");
                         break;
                     default:
                         System.err.println("Opción no válida. Intente de nuevo.");
@@ -92,7 +92,7 @@ public class MenuRunner implements CommandLineRunner {
         System.exit(0); 
     }
 
-    // --- MENÚS ---
+    // menus y logica
 
     private void mostrarMenu() {
         System.out.println("\n--- MENÚ PRINCIPAL ---");
@@ -136,7 +136,7 @@ public class MenuRunner implements CommandLineRunner {
         }
     }
 
-    // --- MÉTODOS DE LÓGICA (ACTUALIZADOS) ---
+    // logicaaa
 
     private void crearCotizacion(Scanner scanner) {
         System.out.println("\n--- Crear Nueva Cotización ---");
@@ -159,13 +159,13 @@ public class MenuRunner implements CommandLineRunner {
             System.out.print("Cantidad: ");
             detalle.setCantidad(Integer.parseInt(scanner.nextLine()));
 
-            // --- ¡AQUÍ ESTÁ EL CAMBIO! ---
+            
             System.out.print("¿Desea agregar una variación a este mueble? (s/n): ");
             String usaVariacion = scanner.nextLine();
             
             if (usaVariacion.equalsIgnoreCase("s")) {
                 System.out.println("--- Variaciones Disponibles ---");
-                listarVariaciones(); // Muestra las variaciones
+                listarVariaciones(); // muestra las variaciones
                 System.out.print("Ingrese el ID de la Variación: ");
                 detalle.setVariacionId(Long.parseLong(scanner.nextLine()));
             } else {
@@ -190,7 +190,7 @@ public class MenuRunner implements CommandLineRunner {
         System.out.println("¡Cotización creada con éxito! ID: " + cotizacionGuardada.getId());
     }
 
-    // --- NUEVOS MÉTODOS AUXILIARES ---
+    //  MÉTODOS AUXILIARES
 
     private void listarVariaciones() {
         List<Variacion> variaciones = variacionService.listarVariaciones();
@@ -220,7 +220,7 @@ public class MenuRunner implements CommandLineRunner {
         System.out.println("¡Variación registrada con éxito! ID: " + variacionGuardada.getId());
     }
 
-    // --- MÉTODOS SIN CAMBIOS (PERO NECESARIOS) ---
+    // metodos extra
     
     private void pausa(Scanner scanner) {
         System.out.println("\n(Presione Enter para continuar...)");

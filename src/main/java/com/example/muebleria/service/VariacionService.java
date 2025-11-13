@@ -14,14 +14,14 @@ public class VariacionService {
 
     private final VariacionRepository variacionRepository;
 
-  
+
     // lista todas las variaciones disponibles en la BD
     @Transactional(readOnly = true)
     public List<Variacion> listarVariaciones() {
         return variacionRepository.findAll();
     }
 
-   
+
 
      // crea una nueva variante
     @Transactional

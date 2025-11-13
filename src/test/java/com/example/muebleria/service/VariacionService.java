@@ -35,50 +35,48 @@ class VariacionServiceTest {
         // datos de prueba
         variacionEjemplo = new Variacion(1L, "Barniz Premium", new BigDecimal("15000"));
         
-        // Una variación que aún no tiene ID
+        // una variación que aún no tiene ID
         nuevaVariacion = new Variacion(null, "Ruedas de Goma", new BigDecimal("5000"));
     }
 
-    /**
-     * Prueba que el servicio lista correctamente todas las variaciones.
-     */
+    
+    // testea que el servicio puede listar correctamente las variaciones 
     @Test
     void testListarVariaciones() {
-        // Arrange (Configurar)
+        
         when(variacionRepository.findAll()).thenReturn(List.of(variacionEjemplo));
 
-        // Act (Actuar)
+        
         List<Variacion> resultado = variacionService.listarVariaciones();
 
-        // Assert (Verificar)
+        
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         assertEquals("Barniz Premium", resultado.get(0).getNombre());
         verify(variacionRepository, times(1)).findAll(); // Verificar que se llamó al repositorio
     }
 
-    /**
-     * Prueba que el servicio puede crear una nueva variación.
-     */
+    
+    // testea que el servicio puede crear una nueva variación
     @Test
     void testCrearVariacion() {
-        // Arrange
-        // Simular que cuando se guarda, el repositorio le asigna un ID (2L)
+        
+        
         when(variacionRepository.save(any(Variacion.class))).thenAnswer(invocation -> {
             Variacion v = invocation.getArgument(0);
-            v.setId(2L); // Simular la asignación de ID
+            v.setId(2L); 
             return v;
         });
 
-        // Act
+        
         Variacion guardada = variacionService.crearVariacion(nuevaVariacion);
 
-        // Assert
+        
         assertNotNull(guardada);
-        assertEquals(2L, guardada.getId()); // El ID fue asignado
+        assertEquals(2L, guardada.getId()); 
         assertEquals("Ruedas de Goma", guardada.getNombre());
         
-        // Verificar que el repositorio fue llamado una vez
+        
         verify(variacionRepository, times(1)).save(nuevaVariacion);
     }
 }
