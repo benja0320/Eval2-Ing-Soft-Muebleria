@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Mueble - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Menú</button>
+        </div>
+        <div class="brand">
+            <h1>Gestión de Inventario</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="header-section">
+            <h2>Registrar Nuevo Mueble</h2>
+            <p>Ingresa los detalles técnicos del producto para añadirlo al catálogo.</p>
+        </div>
+
+        <div class="form-card">
+            <form id="form-crear-mueble">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Mueble</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Silla Gamer X1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <input type="text" id="tipo" name="tipo" placeholder="Ej. Silla, Mesa, Estante" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="material">Material</label>
+                        <input type="text" id="material" name="material" placeholder="Ej. Madera de Roble, Metal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tamano">Tamaño</label>
+                        <select id="tamano" name="tamano" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option value="PEQUENO">Pequeño</option>
+                            <option value="MEDIANO">Mediano</option>
+                            <option value="GRANDE">Grande</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precio">Precio Base ($)</label>
+                        <input type="number" id="precio" name="precioBase" placeholder="50000" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock Inicial</label>
+                        <input type="number" id="stock" name="stock" placeholder="10" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="window.location.href='index.html'">Cancelar</button>
+                    <button type="submit" class="btn-submit">Guardar Mueble</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script src="crear-mueble.js"></script>
+</body>
+</html>

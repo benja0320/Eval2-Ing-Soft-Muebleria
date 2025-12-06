@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -64,9 +65,13 @@ public class CotizacionService {
 
 
     // se usa para obtener una cotizacion por id
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) 
     public Cotizacion obtenerCotizacionPorId(Long id) {
         return cotizacionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cotización no encontrada con id: " + id));
+    }
+    @Transactional(readOnly = true)
+    public List<Cotizacion> listarTodas() { 
+        return cotizacionRepository.findAll(); 
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+        </div>
+        <div class="brand">
+            <h1>Nuestros Productos</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <div class="header-section">
+            <h2>Catálogo Disponible</h2>
+            <p>Explora nuestra selección de muebles de alta calidad.</p>
+        </div>
+
+        <div class="search-bar" style="margin-bottom: 30px;">
+            <input type="text" id="buscador" placeholder="¿Qué estás buscando? (Ej. Mesa, Silla...)" onkeyup="filtrarCatalogo()" 
+                   style="width: 100%; padding: 15px; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        </div>
+
+        <div id="grid-productos" class="catalog-grid">
+            <p class="loading-text">Cargando catálogo...</p>
+        </div>
+
+    </main>
+
+    <script src="catalogo-cliente.js"></script>
+</body>
+</html>

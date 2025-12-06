@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Mueblería - Evaluación 3</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button id="btn-vendedor" class="mode-btn active" onclick="cambiarModo('vendedor')">Modo Vendedor</button>
+            <button id="btn-cliente" class="mode-btn" onclick="cambiarModo('cliente')">Modo Cliente</button>
+        </div>
+        <div class="brand">
+            <h1>Mueblería Hermanos S.A.</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section id="vista-vendedor" class="view-section">
+            <div class="header-section">
+                <h2>Panel de Administración</h2>
+                <p>Gestión del sistema </p>
+            </div>
+
+            <div class="admin-list">
+                <div class="admin-card" onclick="window.location.href='crear-mueble.html'">
+                    <div class="card-icon">🪑</div>
+                    <div class="card-info">
+                        <h3>Registrar Nuevo Mueble</h3>
+                        <p>Agregar un producto al catálogo global.</p>
+                    </div>
+                    <button class="action-btn">Acceder</button>
+                </div>
+
+                <div class="admin-card" onclick="window.location.href='variaciones.html'">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-info">
+                        <h3>Gestionar Variaciones</h3>
+                        <p>Crear materiales, colores y acabados extra.</p>
+                    </div>
+                    <button class="action-btn">Acceder</button>
+                </div>
+
+                <div class="admin-card" onclick="window.location.href='confirmar-venta.html'">
+                    <div class="card-icon">✅</div>
+                    <div class="card-info">
+                        <h3>Confirmar Ventas</h3>
+                        <p>Validar cotizaciones y descontar stock.</p>
+                    </div>
+                    <button class="action-btn">Acceder</button>
+                </div>
+
+                 <div class="admin-card" onclick="window.location.href='inventario.html'">
+                    <div class="card-icon">📋</div>
+                    <div class="card-info">
+                        <h3>Ver Catálogo e Inventario</h3>
+                        <p>Revisar stock actual y estado de muebles.</p>
+                    </div>
+                    <button class="action-btn">Acceder</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="vista-cliente" class="view-section hidden">
+            <div class="header-section">
+                <h2>Bienvenido, Cliente</h2>
+                <p>Cotiza los mejores muebles para tu hogar</p>
+            </div>
+
+            <div class="client-grid">
+                <div class="client-card highlight" onclick="window.location.href='cotizar.html'">
+                    <div class="icon-large">📝</div>
+                    <h3>Nueva Cotización</h3>
+                    <p>Crea una solicitud de cotización personalizada.</p>
+                    <button class="btn-primary">Cotizar Ahora</button>
+                </div>
+
+                <div class="client-card" onclick="window.location.href='catalogo-cliente.html'">
+                    <div class="icon-large">🔍</div>
+                    <h3>Ver Catálogo</h3>
+                    <p>Explora nuestros productos disponibles.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

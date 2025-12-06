@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Cotización - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+        </div>
+        <div class="brand">
+            <h1>Portal de Clientes</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <div class="header-section">
+            <h2>Crear Cotización</h2>
+            <p>Selecciona los muebles y personalízalos a tu gusto.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <div class="form-card">
+                <h3>Agregar Producto</h3>
+                <form id="form-agregar-item">
+                    
+                    <div class="form-group">
+                        <label for="select-mueble">Mueble</label>
+                        <select id="select-mueble" required onchange="actualizarPrecioEstimado()">
+                            <option value="" disabled selected>Cargando muebles...</option>
+                        </select>
+                        <small id="info-mueble" style="color: #6b7280; margin-top: 5px;">Precio Base: $0</small>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="select-variacion">Variación / Acabado (Opcional)</label>
+                        <select id="select-variacion" onchange="actualizarPrecioEstimado()">
+                            <option value="">Ninguna (Estándar)</option>
+                            </select>
+                        <small id="info-variacion" style="color: #6b7280; margin-top: 5px;">Costo extra: $0</small>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" value="1" min="1" required onchange="actualizarPrecioEstimado()">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" style="width: 100%; background-color: #10b981;">
+                            + Agregar a la Cotización
+                        </button>
+                    </div>
+                </form>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f0fdf4; border-radius: 8px; text-align: center;">
+                    <p style="font-size: 0.9rem; color: #166534;">Estimado por unidad</p>
+                    <strong style="font-size: 1.5rem; color: #15803d;" id="precio-estimado">$0</strong>
+                </div>
+            </div>
+
+            <div class="list-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>Resumen</h3>
+                    <span id="contador-items" class="badge status-pending">0 Ítems</span>
+                </div>
+
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Variación</th>
+                                <th>Cant.</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-carrito">
+                            <tr><td colspan="4" class="empty-msg">Tu cotización está vacía.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 20px; border-top: 2px solid #e5e7eb; padding-top: 20px;">
+                    <button id="btn-finalizar" class="btn-submit" style="width: 100%;" disabled onclick="enviarCotizacion()">
+                        Finalizar y Solicitar Cotización
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="cotizar.js"></script>
+</body>
+</html>

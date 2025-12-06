@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Variaciones - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Menú</button>
+        </div>
+        <div class="brand">
+            <h1>Configuración de Catálogo</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <div class="header-section">
+            <h2>Gestionar Variaciones</h2>
+            <p>Crea modificadores de precio (materiales premium, acabados, etc.)</p>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <div class="form-card">
+                <h3>Nueva Variación</h3>
+                <form id="form-variacion">
+                    <div class="form-group">
+                        <label for="nombre">Nombre de la Variación</label>
+                        <input type="text" id="nombre" placeholder="Ej. Barniz Premium, Ruedas" required>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="aumento">Aumento de Precio ($)</label>
+                        <input type="number" id="aumento" placeholder="15000" min="0" required>
+                        <small style="color: #6b7280; display: block; margin-top: 5px;">
+                            Este valor se sumará al precio base del mueble.
+                        </small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" style="width: 100%;">Guardar Variación</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <h3>Variaciones Activas</h3>
+                <div id="lista-variaciones" class="items-list">
+                    <p class="loading-text">Cargando datos...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="variaciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Ventas - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Menú</button>
+        </div>
+        <div class="brand">
+            <h1>Caja y Ventas</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="header-section">
+            <h2>Confirmar Cotizaciones</h2>
+            <p>Revisa las cotizaciones pendientes y procésalas como ventas finales.</p>
+        </div>
+
+        <div class="list-card">
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Total Items</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cotizaciones">
+                        <tr><td colspan="5" class="loading-text">Cargando cotizaciones...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="confirmar-venta.js"></script>
+</body>
+</html>

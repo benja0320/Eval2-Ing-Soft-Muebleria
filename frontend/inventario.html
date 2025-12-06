@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario General - Mueblería Hermanos S.A.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="window.location.href='index.html'">← Volver al Menú</button>
+        </div>
+        <div class="brand">
+            <h1>Gestión de Inventario</h1>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <div class="header-section" style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <h2>Catálogo e Inventario</h2>
+                <p>Vista global de todos los productos registrados en el sistema.</p>
+            </div>
+            <button class="btn-small" onclick="window.location.href='crear-mueble.html'" style="background-color: #10b981;">+ Nuevo Mueble</button>
+        </div>
+
+        <div class="search-bar" style="margin-bottom: 20px;">
+            <input type="text" id="buscador" placeholder="Buscar por nombre o tipo..." onkeyup="filtrarTabla()" 
+                   style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;">
+        </div>
+
+        <div class="list-card">
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Precio Base</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-muebles">
+                        <tr><td colspan="7" class="loading-text">Cargando inventario...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="inventario.js"></script>
+</body>
+</html>
